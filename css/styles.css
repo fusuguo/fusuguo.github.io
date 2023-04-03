@@ -104,6 +104,9 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.my-email {
+    text-transform: lowercase;;
+}
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -571,6 +574,12 @@ progress {
 
 .list-inline-item {
   display: inline-block;
+}
+.list-inline-item-icon {
+  display: inline-block;
+  /* font-size: 3rem; */
+  /* width : 16px; */
+  height: 1em;
 }
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
@@ -10848,7 +10857,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 h1, .h1 {
@@ -10862,7 +10871,7 @@ p.lead {
 
 .subheading {
   font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-weight: 500;
   font-size: 1.5rem;
 }
