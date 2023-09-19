@@ -51,7 +51,9 @@ function init() {
         var buffer = new Float32Array(bufferLength);
         analyser.getFloatTimeDomainData(buffer);
         var detectedFrequency = autoCorrelate(buffer, audioContext.sampleRate);
-        
+        if (detectedFrequency > 5000) {
+          console.log("Detected Frequency: " + detectedFrequency);
+        }
         var detectedNote = noteStrings[noteFromPitch(detectedFrequency) % 12];
     
         // var roundingValue = document.querySelector('input[name="rounding"]:checked').value;
