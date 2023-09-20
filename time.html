@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Quicksand:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        /* :root { */
+    /* 定义在根选择器中的变量可以全局使用 */
+    /* --back-color: #509296; */
+    /* --text-color: #fffbf8; */
+    /* --box-color: #509296;} */
+    :root {
+    --back-color-1: #509296;
+    --text-color-1: #fffbf8;
+    --box-color-1: #509296;
+
+    --back-color-2: #1E1E1E; /* 你可以自行修改这些颜色 */
+    --text-color-2: #fafafaf7; /* 你可以自行修改这些颜色 */
+    --box-color-2: #1E1E1E;  /* 你可以自行修改这些颜色 */
+
+    --back-color-3: #3D2952; /* 你可以自行修改这些颜色 */
+    --text-color-3: #D3D3D9; /* 你可以自行修改这些颜色 */
+    --box-color-3: #3D2952;  /* 你可以自行修改这些颜色 */
+    /* 727415 */
+    /* E07869 */
+    --back-color: var(--back-color-1);
+    --text-color: var(--text-color-1);
+    --box-color: var(--box-color-1);
+}
+
+        body {
+            background-color: var(--back-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Lato', sans-serif;
+            /* font-family: 'Quicksand', Arial, sans-serif;
+            font-family: 'Lato', sans-serif; */
+            user-select: none;
+            -webkit-user-select: none;  /* Safari */
+            -moz-user-select: none;     /* Firefox */
+            -ms-user-select: none;      /* IE/Edge */
+        }
+
+        .date-text {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            font-size: 3vw;
+            margin-bottom: 5vw;
+            letter-spacing: 0.5vw; 
+        }
+
+        .time-container {
+            display: flex;
+            border: none;
+            width: 70vw;
+            height: 26vw;
+            justify-content: space-between;
+        }
+
+        .digit-box {
+            background-color: var(--box-color);
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 2px;
+            border-radius: 10px;
+        }
+
+        .space-box {
+            background-color: var(--back-color);
+            /* color: #fffbf8; */
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18vw;
+        }
+
+        .digit-text {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            font-size: 20vw;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="date" class="date-text"></span>
+    <div class="time-container">
+        <div class="digit-box">
+            <span id="hour1" class="digit-text">0</span>
+        </div>
+        <div class="digit-box">
+            <span id="hour2" class="digit-text">0</span>
+        </div>
+        <div class="space-box">
+            <span></span>
+        </div>
+        <div class="digit-box">
+            <span id="minute1" class="digit-text">0</span>
+        </div>
+        <div class="digit-box">
+            <span id="minute2" class="digit-text">0</span>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('dblclick', function() {
+    const currentBackColor = getComputedStyle(document.documentElement).getPropertyValue('--back-color').trim();
+
+    if (currentBackColor === getComputedStyle(document.documentElement).getPropertyValue('--back-color-1').trim()) {
+        document.documentElement.style.setProperty('--back-color', 'var(--back-color-2)');
+        document.documentElement.style.setProperty('--text-color', 'var(--text-color-2)');
+        document.documentElement.style.setProperty('--box-color', 'var(--box-color-2)');
+    } else if (currentBackColor === getComputedStyle(document.documentElement).getPropertyValue('--back-color-2').trim()){
+        document.documentElement.style.setProperty('--back-color', 'var(--back-color-3)');
+        document.documentElement.style.setProperty('--text-color', 'var(--text-color-3)');
+        document.documentElement.style.setProperty('--box-color', 'var(--box-color-3)');
+    } else {
+        document.documentElement.style.setProperty('--back-color', 'var(--back-color-1)');
+        document.documentElement.style.setProperty('--text-color', 'var(--text-color-1)');
+        document.documentElement.style.setProperty('--box-color', 'var(--box-color-1)');
+    }
+});
+
+        function updateClockAndDate() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const daysOfWeek = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+            const dayOfWeek = daysOfWeek[now.getDay()];
+
+            document.getElementById('hour1').innerText = hours[0];
+            document.getElementById('hour2').innerText = hours[1];
+            document.getElementById('minute1').innerText = minutes[0];
+            document.getElementById('minute2').innerText = minutes[1];
+            document.getElementById('date').innerHTML = `${year}.${month}.${day}&nbsp;&nbsp;&nbsp;&nbsp;${dayOfWeek}`;
+
+
+            setTimeout(updateClockAndDate, 1000 * 60);
+        }
+
+        updateClockAndDate();  // 初始化
+    </script>
+</body>
+
+</html>
